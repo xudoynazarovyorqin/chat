@@ -28,6 +28,7 @@
             <div class="username ">
             <?php 
               $ban_users = $result_ban->fetch_assoc();
+              // var_dump($ban_users);
               if($ban_users['banned_id']==$to['unique_id'] && $ban_users['from_id']==$id) : ?>
               <div class="text-center">
                 <h4 class="card-title m-auto ml-3"><strong class="ml-3"><?=$to['name']?></strong></h4>
