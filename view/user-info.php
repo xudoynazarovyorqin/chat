@@ -15,8 +15,7 @@
       $to = mysqli_fetch_assoc($result3);
 
       $sql_m = "SELECT * FROM messages where incoming_msg_id='$to_id' AND outgoing_msg_id='$id' OR incoming_msg_id='$id' AND outgoing_msg_id='$to_id'";
-      // $sql_m_left = "SELECT * FROM messages where incoming_msg_id='$id' AND outgoing_msg_id='$to_id'";
       $result_m = mysqli_query($db, $sql_m);
-      // var_dump($result_m);
-      // $result_m_left = mysqli_query($db, $sql_m_left);
-     
+      
+      $sql_ban = "SELECT * FROM ban_user";
+      $result_ban = mysqli_query($db, $sql_ban);
