@@ -47,10 +47,12 @@
                   </div>
                   <div class="msg-card-left my-1">
               <?php if($message['incoming_msg_id'] == $id) :?>
+              <?php if($message['is_ban']==0): ?>
                 <div class="bg-left">
                 <h5><?=$message['msg']?></h5>
                 </div>
-                <?php endif; ?>
+                <?php endif;
+                endif; ?>
                 </div>
           <?php endwhile;?>
       
@@ -61,7 +63,6 @@
             <input type="text" name="message" class="form-control" >
             <input type="hidden" name="user_id" value="<?=$_GET['id']?>">
             <input type="hidden" name="to_id" value="<?=$_GET['to']?>">
-            <!-- <input type="file" name="message" class="btn btn-light form-control"><i class="fas fa-folder-open"></i></input> -->
             <button type="submit" class="btn btn-secondary m-2"><i class="fab fa-telegram-plane"></i></button>
           </form>
         </div>
