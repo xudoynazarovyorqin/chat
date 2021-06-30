@@ -18,7 +18,8 @@ class Chat
     {
         $to = $_REQUEST['to_id'];
         $id =$_REQUEST['user_id'];
-        $message = $_REQUEST['message'];
+        $message = strval($_REQUEST['message']);
+        // die(var_dump($message));
         $db = mysqli_connect('localhost', 'root', 'root', 'chat');
         $ban_users_sql = "SELECT * FROM ban_user";
         $result_ban= mysqli_query($db, $ban_users_sql);

@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
             integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
             crossorigin="anonymous" />
-    
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+   
 </head>
 <body>
 <?php require 'user-info.php'; ?>
@@ -49,28 +50,10 @@
             <?php endif;?>
         </div>
       
-        <div class="chat-menu" id="scroll">
-            
-           <?php while($message = $result_m->fetch_assoc()) :?>
-                  <div class="msg-card-right">
-              <?php if($message['incoming_msg_id'] == $to_id) :?>
-                  <div class="bg-right">
-                  <h5 class="px-3"><?=$message['msg']?></h5>
-                  </div>
-              <?php endif; ?>
-                  </div>
-                  <div class="msg-card-left my-1">
-              <?php if($message['incoming_msg_id'] == $id) :?>
-              <?php if($message['is_ban']==0): ?>
-                <div class="bg-left">
-                <h5 class="px-3"><?=$message['msg']?></h5>
-                </div>
-                <?php endif;
-                endif; ?>
-                </div>
-          <?php endwhile;?>
-      
+        <div class="scroll" id="scroll">
+        <div class="chat-menu">
           
+          </div>
         </div>
         <div class="message-input">
 
@@ -87,18 +70,30 @@
             <input type="text" name="message" class="form-control" >
             <input type="hidden" name="user_id" value="<?=$_GET['id']?>">
             <input type="hidden" name="to_id" value="<?=$_GET['to']?>">
-            <button type="submit" class="btn btn-secondary m-2"><i class="fab fa-telegram-plane"></i></button>
+            <button type="submit"  class="btn btn-secondary m-2"><i class="fab fa-telegram-plane"></i></button>
           </form>
           <?php endif; ?>
         </div>
       </div>
     </div>
   </div>
-  <?php 
-    // var_dump($to);
-  ?>
+  
 <script>
-document.getElementById('scroll').scrollTop = 9999999;
+  $(document).ready(function(){
+    setInterval(function(){
+      $('#scroll').load("chat-place.php?id=<?=$id?>&&to=<?=$to_id?>").fadeIn("slow");
+    }, 100);
+    
+    
+  });
 </script>
+<script>
+  $(document).ready(function(){
+    setTimeout(function(){
+      document.getElementById('scroll').scrollTop = 9999999;
+    }, 200);
+  });
+</script>
+
 </body>
 </html>
