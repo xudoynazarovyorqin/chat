@@ -33,16 +33,19 @@
                 <h4 class="card-title m-auto ml-3"><strong class="ml-3"><?=$to['name']?></strong></h4>
                 <small class="ban">Blocked you</small>
               </div>
-              <?php endif;
-              if($ban_users['banned_id']!=$to['unique_id'] && $ban_users['from_id']!=$id) : ?>
+              <?php else: ?>
                 <h4 class="card-title m-auto ml-3"><strong class="ml-3"><?=$to['name']?></strong></h4>
                 <?php endif; ?>
             </div>
-            <form action="../controllers/ban-user.php">
+        <?php if($ban_users['from_id']==$to['unique_id'] && $ban_users['banned_id']==$id) : ?>
+              <button  class="btn btn-light ban" value disabled> <i class="fas fa-ban fa-2x p-2 "></i></button>
+        <?php else : ?>
+          <form action="../controllers/ban-user.php">
               <input type="hidden" name="id" value="<?=$id?>">
               <input type="hidden" name="to_id" value="<?=$to_id?>">
               <button  class="btn btn-light ban"> <i class="fas fa-ban fa-2x p-2 "></i></button>
             </form>
+            <?php endif;?>
         </div>
       
         <div class="chat-menu" id="scroll">
@@ -69,17 +72,30 @@
           
         </div>
         <div class="message-input">
+
+        <?php if($ban_users['from_id']==$to['unique_id'] && $ban_users['banned_id']==$id) : ?>
+                <form action="../controllers/ban-user.php">
+                  <input type="hidden" name="id" value="<?=$id?>">
+                  <input type="hidden" name="to_id" value="<?=$to_id?>">
+                  <button class="btn btn-large btn-block ban py-2 my-2" type="submit"><b>Unblock</b></button>
+                </form>
+              
+              <?php else: ?>
+
           <form action="../controllers/send.php">
             <input type="text" name="message" class="form-control" >
             <input type="hidden" name="user_id" value="<?=$_GET['id']?>">
             <input type="hidden" name="to_id" value="<?=$_GET['to']?>">
             <button type="submit" class="btn btn-secondary m-2"><i class="fab fa-telegram-plane"></i></button>
           </form>
+          <?php endif; ?>
         </div>
       </div>
     </div>
   </div>
-
+  <?php 
+    // var_dump($to);
+  ?>
 <script>
 document.getElementById('scroll').scrollTop = 9999999;
 </script>
